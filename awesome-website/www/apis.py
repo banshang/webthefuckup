@@ -7,7 +7,8 @@ class Page(object):
     def __init__(self, item_count, page_index=1, page_size=8):
         self.item_count = item_count
         self.page_size = page_size
-        self.page_count = item_count // page_size + (1 if item_count % page_size > 0 else 0)
+        self.page_count = item_count // page_size + (1 if item_count %
+                                                     page_size > 0 else 0)
         if (item_count == 0) or (page_index > self.page_count):
             self.offset = 0
             self.limit = 0
@@ -21,35 +22,40 @@ class Page(object):
 
     def __str__(self):
         return 'item_count: %s, page_count: %s, page_index: %s, page_size: %s,\
-                offset: %s, limit: %s' % (self.item_count, self.page_count,\
-                self.page_index, self.page_size, self.offset, self.limit)
+                offset: %s, limit: %s' % (self.item_count, self.page_count,
+                                          self.page_index, self.page_size,
+                                          self.offset, self.limit)
     __repr__ = __str__
 
+
 ## 以下为API的几类错误代码
-class APIError(Excpetion):
+class APIError(Exception):
     def __init__(self, error, data='', message=''):
         super(APIError, self).__init__(message)
         self.error = error
         self.data = data
         self.message = message
 
+
 class APIValueError(APIError):
     def __init__(self, field, message=''):
-        super(APIError, self).__init__('value:invalid', field, message)
+        super(APIValueError, self).__init__('value:invalid', field, message)
+
 
 class APIResourceNotFoundError(APIError):
-    def __init__(self, message=''):
+    def __init__(self, field, message=''):
         super(APIResourceNotFoundError, self).__init__('value:notfound',
-                                                        field,
-                                                        message)
+                                                       field,
+                                                       message)
+
 
 class APIPermissionError(APIError):
     def __init__(self, message=''):
-        super(APIPermissonError, self).__init__('permission:forbidden',
+        super(APIPermissionError, self).__init__('permission:forbidden',
                                                  'permission',
-                                                  message)
+                                                 message)
 
 
-if __name__ = '__main__':
+if __name__ == '__main__':
     import doctest
     doctest.testmod()
