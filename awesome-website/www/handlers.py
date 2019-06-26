@@ -6,7 +6,7 @@ import asyncio
 @get('/')
 async def index(request):
     users = await User.findAll()
-    return{
+    return {
         '__template__': 'test.html',
         'users': users
     }

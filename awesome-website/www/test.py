@@ -6,7 +6,7 @@ from models import User, Blog, Comment
 async def test(loop):
     await orm.create_pool(loop, user='root', password=r'qq875884574',\
                           db='awesome')
-    u = User(name='Test2', email='test@qq.com', passwd='1234567890',\
+    u = User(name='Test2', email='test2@qq.com', passwd='1234567890',\
              image='about:blank')
     await u.save()
     orm.__pool.close()
