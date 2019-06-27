@@ -12,7 +12,7 @@ import orm
 from coroweb import add_routes, add_static
 
 ## handlers是url处理模块，当handlers.py在API章节里完全编辑完再将下一行代码的双#去掉
-## from handlers import cookie2user, COOKIE_NAME
+from handlers import cookie2user, COOKIE_NAME
 
 
 ## 初始化jinja2的函数
@@ -28,8 +28,7 @@ def init_jinja2(app, **kw):
         )
     path = kw.get('path', None)
     if path is None:
-        path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                            'templetes')
+        path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
     logging.info('set jinja2 template path: %s' % path)
     env = Environment(loader=FileSystemLoader(path), **options)
     filters = kw.get('filters', None)
@@ -50,7 +49,7 @@ async def logger_factory(app, handler):
 
 ## 认证处理工厂--把当前用户绑定到request上，并对URL/manage/进行拦截， 检查当前用户是否是管理员身份
 ## 需要handlers.py的支持，当handlers.py在API章节里编辑完再将下面代码的双##去掉
-"""
+
 async def auth_factory(app, handler):
     async def auth(request):
         logging.info('check user: %s %s' % (request.method, request.path))
@@ -65,7 +64,7 @@ async def auth_factory(app, handler):
             return web.HTTPFound('/signin')
         return (await handler(request))
     return auth
-"""
+
 
 
 ## 数据处理工厂
@@ -111,10 +110,8 @@ async def response_factory(app, handler):
                 return resp
             else:
                 ## 在handlers.py完全完成后，去掉下一行的双##号
-                ## r['__user__'] = request.__user__
-                resp = web.Response(body=app['__templating__']
-                                    .get_template(template).
-                                    render(**r).encode('utf-8'))
+                r['__user__'] = request.__user__
+                resp = web.Response(body=app['__templating__'].get_template(template).render(**r).encode('utf-8'))
                 resp.content_type = 'text/html;charset=utf-8'
                 return resp
         if isinstance(r, int) and r >= 100 and r < 600:
@@ -149,11 +146,7 @@ def datetime_filter(t):
 async def init(loop):
     await orm.create_pool(loop=loop, **configs.db)
     ## 在handlers.py完全完成后，在下面middlewares的list中加入auth_factory
-    app = web.Application(loop=loop,
-                          middlewares=[
-                              logger_factory,
-                              response_factory,
-                          ])
+    app = web.Application(loop=loop, middlewares=[logger_factory, response_factory, auth_factory])
     init_jinja2(app, filters=dict(datetime=datetime_filter))
     add_routes(app, 'handlers')
     add_static(app)

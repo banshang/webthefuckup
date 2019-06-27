@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<!--处理分页导航栏代码-->
+{% macro pagination(page) %}
+    <u1 class="uk-pagination uk-flex-center uk-margin-medium-top uk-margin-large-bottom">
+        {% if page.has_previous %}
+            <li><a href="?page={{ page.page_index - 1 }}"><span uk-pagination-previous></span></a></li>
+        {% else %}
+            <li class="uk-disabled"><a href="#"><span uk-pagination-previous></span></a></li>
+        {% endif %}
+            <li class="uk-active"><span>{{ page.page_index }}</span></li>
+        {% if page.has_next %}
+            <li><a href="?page={{ page.page_index + 1 }}"><span uk-pagination-next></span></a></li>
+        {% else %}
+            <li class="uk-disabled"><a href="#"><span uk-pagination-next></span></a></li>
+        {% endif %}
+    </u1>
+{% endmacro %}
+
+<!--导航页代码-->
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=divice-width, initial-scale=0.9,minimum-scale=0.9,maxmum-scale=0.9,user-scalable=no">
+    <meta name="wap-font-scale" content="no">
+    <!--jinja2 meta块-->
+    {% block meta %}<!-- block meta -->{% endblock %}
+    <!--jinja2 title块-->
+    <title>{% block title %} ? {% endblock %}| AwesomeBlog</title>
+    <link rel="stylesheet" href="/static/css/uikit.min.css">
+    <link rel="stylesheet" href="/static/css/awesome.css" />
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/sha1.min.js"></script>
+    <script src="/static/js/uikit.min.js"></script>
+    <script src="/static/js/icons.min.js"></script>
+    <script src="/static/js/sticky.min.js"></script>
+    <script src="/static/js/vue.min.js"></script>
+    <script src="/static/js/awesome.js"></script>
+    <!--jinja2 beforehead块-->
+    {% block beforehead %}<!-- before head-->{% endblock %}
+</head>
+
+<!--导航页正文内容-->
+<body>
+    <!--"uk-"开头的都是UIkit里的组件，具体参考UIKit官网的Documents-->
+    <!--uk-visible@m是大于中等尺寸屏幕时显示的UI-->
+
+    <div class="uk-margin uk-visible@m" style="background-color:rgba(100,150,185,0);">
+    <div class="uk-container uk-container-medium">
+    <!--导航栏UI-->
+    <nav class="uk-navbar-container" uk-navbar style="background-color:rgba(255,255,255,0);">
+        <div class="uk-navbar-left uk-margin-medium-top uk-margin-medium-bottom">
+            <a class=
+</body>
+</html>
