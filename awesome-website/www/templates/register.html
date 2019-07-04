@@ -8,7 +8,7 @@
 <script>
 
     function validateEmail(email) {
-        var re = /^[a-z0-9\.\-\_]+\@[a-z0-9\-\_]+(\.[a-z0-9\-\_]+){1.4}$/;
+        var re = /^[a-z0-9\.\-\_]+\@[a-z0-9\-\_]+(\.[a-z0-9\-\_]+){1,4}$/;
         return re.test(email.toLowerCase()) ;
     }
 
@@ -19,7 +19,7 @@
                 name: '',
                 email: '',
                 password1: '',
-                password2: '',
+                password2: ''
             },
             methods: {
                 submit: function (event) {
@@ -31,7 +31,7 @@
                     if (!validateEmail(this.email.trim().toLowerCase())) {
                         return $form.showFormError('CORRECT EMAIL/请输入正确的Email地址');
                     }
-                    if (this.password1.lenth < 6) {
+                    if (this.password1.length < 6) {
                         return $form.showFormError('PASSWORD AT LEAST 6 CHAR/口令长度至少为6个字符');
                     }
                     if (this.password1 !== this.password2) {
@@ -74,11 +74,11 @@
             <div class="uk-margin-top">
                 <label class="uk-form-label">EMAIL/电子邮件:</label>
                 <div class="uk-form-controls">
-                    <input class="uk-iput uk-form-width-medium" v-model="email" type="text" maxlength="50" placeholder="your-name@example.com">
+                    <input class="uk-input uk-form-width-medium" v-model="email" type="text" maxlength="50" placeholder="your-name@example.com">
                 </div>
             </div>
             <div class="uk-margin-top">
-                <label class="uk-form-label">PASSWOrd/输入口令:</label>
+                <label class="uk-form-label">PASSWORD/输入口令:</label>
                 <div class="uk-form-controls">
                     <input class="uk-input uk-form-width-medium" v-model="password1" type="password" maxlength="50" placeholder="输入口令">
                 </div>

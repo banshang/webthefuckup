@@ -23,13 +23,14 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=divice-width, initial-scale=0.9,minimum-scale=0.9,maxmum-scale=0.9,user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9,minimum-scale=0.9,maxmum-scale=0.9,user-scalable=no">
     <meta name="wap-font-scale" content="no">
     <!--jinja2 meta块-->
     {% block meta %}<!-- block meta -->{% endblock %}
     <!--jinja2 title块-->
     <title>{% block title %} ? {% endblock %}| AwesomeBlog</title>
     <link rel="stylesheet" href="/static/css/uikit.min.css">
+	
     <link rel="stylesheet" href="/static/css/awesome.css" />
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/sha1.min.js"></script>
@@ -39,7 +40,7 @@
     <script src="/static/js/vue.min.js"></script>
     <script src="/static/js/awesome.js"></script>
     <!--jinja2 beforehead块-->
-    {% block beforehead %}<!-- before head-->{% endblock %}
+    {% block beforehead %}<!-- before head -->{% endblock %}
 </head>
 
 <!--导航页正文内容-->
@@ -102,8 +103,8 @@
             <div id="offcanvas-nav" uk-offcanvas="overlay: true; flip: true">
             <div class="uk-offcanvas-bar uk-flex uk-flex-column">
             <ul class="uk-nav uk-nav-default uk-margin-auto-vertical">
-                <li><a href="/" Article | 日志></a></li>
-                <li><a href="https://aodabo.tech/tags/tutotial"> Tutorial | 教程</a></li>
+                <li><a href="/"> Article | 日志</a></li>
+                <li><a href="https://aodabo.tech/tags/tutorial"> Tutorial | 教程</a></li>
                 <li><a href="https://aodabo.tech/tags/landscape"> Landscape | 景观</a></li>
                 <li><a href="https://aodabo.tech/tags/coding"> Coding | 编程</a></li>
                 {% if __user__ %}

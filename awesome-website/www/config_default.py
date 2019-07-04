@@ -1,3 +1,7 @@
+#!usr/bin/env python3
+# -*- coding:utf-8 -*-
+
+
 # config_default.py
 
 configs = {
